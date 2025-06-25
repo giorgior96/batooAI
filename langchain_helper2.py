@@ -7,6 +7,12 @@ Server RAG con:
 • esclude boat senza prezzo numerico quando necessario
 """
 
+
+__import__("pysqlite3")              # installato via pysqlite3-binary
+import sys
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
+from langchain_chroma import Chroma
 import os, re
 from dotenv import load_dotenv
 from typing import Sequence
