@@ -1,6 +1,11 @@
+
+__import__("pysqlite3")              # installato via pysqlite3-binary
+import sys
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
 import streamlit as st
 from langchain_helper import execute_user_query
-import sqlite3
+
 
 
 st.title("Batoo AI ✨")
