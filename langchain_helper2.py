@@ -58,8 +58,12 @@ embeddings = GoogleGenerativeAIEmbeddings(
     google_api_key=os.environ["GEMINI_API_KEYS"]
 )
 
-db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings)
+if not Path(CHROMA_DIR).exists():
+    build_chroma()
 
+# ─── Ora carica Chroma ─────────────────────────────────
+db = Chroma(persist_directory=str(CHROMA_DIR),
+            embedding_function=embeddings)
 # costruisci set brand da campo brand_normalized
 BRAND_VOCAB = {
     (md.get("boat_name") or "").lower()
